@@ -30,7 +30,7 @@ class BegopaApplicationTests {
 		String todayFoodName = cookList[random.nextInt(cookList.length)];
 
 
-		System.out.println("오늘은 " + todayFoodName + " 이걸로 먹는닷");
+		System.out.println("오늘은 " + todayFoodName + " 이걸로 먹는다");
 		log.info(todayFoodName);
 
 

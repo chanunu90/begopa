@@ -6,9 +6,76 @@
     <title>오늘은 뭘먹을까</title>
 </head>
 <body>
-    [[${dto}]]
+    <!-- [[${dto}]] -->
     <h1>오늘은 뭘먹어야할까</h1>
-    <p>Food Name: <span th:text="${dto.foodName}"></span></p>
+    <!-- <p>Food Name: <span th:text="${dto.foodName}"></span></p> -->
+    
+    <!-- <p>Food Name: <span th:text="${dto.foodName}"></span></p> -->
 
+
+    <div>
+        <ul id="foodUL">
+
+        </ul>
+    </div>
+
+    <div>
+        <button id="renderBtn">다시 뽑기</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script layout:fragment="script" th:inline="javascript">
+
+
+        let foodUL = document.querySelector("#foodUL");
+        const renderBtn = document.querySelector("#renderBtn");
+        
+
+        // 요리목록 목록
+        const getCookList = async () => {
+            
+            const res = await axios.get(`http://106.246.47.33:8080/api/begopa/main`)
+            // alert(res.data)
+
+            
+            return res.data
+        }
+
+        function loadReplyData () {
+        
+            getCookList().then(json => {
+            console.log("then result---------------")
+            console.log(json)
+
+            let str = ""
+
+            if(!json){
+                return
+            }
+
+            const {foodNo, foodName} = json
+
+            str += `<li data-foodNo= ${foodNo}> 오늘의 메뉴 : ${foodNo}번 ${foodName}</li>`
+
+            console.log(str)
+
+
+            foodUL.innerHTML = str
+
+            })
+        
+        }
+
+        //버튼
+        renderBtn.addEventListener("click" , () => {
+
+            loadReplyData()
+
+        })
+
+        //요리 가지고와
+        loadReplyData()
+
+    </script>
 </body>
 </html>

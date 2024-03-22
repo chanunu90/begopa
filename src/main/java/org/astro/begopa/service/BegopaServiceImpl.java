@@ -23,18 +23,20 @@ public class BegopaServiceImpl implements BegopaService{
             "순대 국밥",
 			"이자카야",
 			"장어",
-			"니들이 골라"
+			"스페인식",
+			"중식"
 		};
 
 		Random random = new Random();
 
 		//랜덤돌려서 들어갈 음식
-		String todayFoodName = cookList[random.nextInt(cookList.length)];
+		Integer cnt = random.nextInt(cookList.length);
+		String todayFoodName = cookList[cnt];
 
 		System.out.println("오늘은 " + todayFoodName + " 이걸로 먹는다");
 		log.info(todayFoodName);
 
-        return BegopaDto.builder().foodName(todayFoodName).build();
+        return BegopaDto.builder().foodNo(cnt).foodName(todayFoodName).build();
     }
     
     

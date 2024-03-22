@@ -11,6 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BegopaDto {
     
+
     private String foodName;
 
+    private Integer foodNo;
+
+    private String Preference;
+
+        
 }
